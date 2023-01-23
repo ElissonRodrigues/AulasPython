@@ -19,7 +19,7 @@ while True:
 
                 if not 'erro' in json.keys():
                     system('cls' if name == 'nt' else 'clear')
-                    print ('\n'.join(map(lambda x: f'{x[1].upper()}: {json[x[1]] if json[x[1]] else "N/A"}', enumerate(json.keys()))))
+                    print ('\n'.join(map(lambda x: f'{x.upper()}: {json[x] if json[x] else "N/A"}', json.keys())))
                 else:
                     print ('Verifique o cep e tente novamente')
         except:
