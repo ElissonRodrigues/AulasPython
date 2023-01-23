@@ -1,0 +1,7 @@
+nome,matricula,notas,curso
+Renato Barreto,234373,"{'nota1': 7, 'nota2': 7, 'nota3': 9, 'nota4': 6}",Redes Computadores
+Alisson Rodrigues,2343233,"{'nota1': 5, 'nota2': 7, 'nota3': 6, 'nota4': 6}",Redes Computadores
+Carlos Silva,234373,"{'nota1': 2, 'nota2': 3, 'nota3': 2, 'nota4': 2}",Redes Computadores
+Marcos Silva,5346,"{'nota1': 6.0, 'nota2': 7.5, 'nota3': 4.0, 'nota4': 6.5}",Edificações
+Renato Oliveira,8655,"{'nota1': 5.0, 'nota2': 7.0, 'nota3': 5.6, 'nota4': 6.7}",Edificações
+Marta Silva,64643,"{'nota1': 6.8, 'nota2': 6.7, 'nota3': 5.6, 'nota4': 8.7}",Edificações
