@@ -5,16 +5,7 @@ from os import system, name
 
 tentativas_login = 3
 
-def login(user: str, password: str) -> dict[int, dict]:
-    """Fazer login no SUAP IFRN
-
-    Args:
-        user (str): Matricula do usuário
-        password (str): Senha
-
-    Returns:
-        dict[int, dict]: dict com os dados de login e status
-    """    
+def login(user: str, password: str) -> dict[int, dict]:    
     payload = {
         'username': user,
         'password': password
