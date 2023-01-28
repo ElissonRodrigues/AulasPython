@@ -1,6 +1,5 @@
 from prettytable import PrettyTable
 from requests import get
-from dotmap import DotMap
 
 while True:
     sigla = input('\n\nDigite a sigla do seu estado, ex: RN, AC, SP: ').upper()
