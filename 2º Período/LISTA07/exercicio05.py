@@ -7,7 +7,7 @@ while True:
     if not all([len(sigla) == 2, sigla.isalpha()]):
         print('Verifique a sigla do seu estado e tente novamente.')
     else:
-        req = get(f'https://servicodados.ibge.gov.br/api/v1/localidades/estados/{sigla}/municipios')
+        req = get(f'http://servicodados.ibge.gov.br/api/v1/localidades/estados/{sigla}/municipios')
         json = req.json()
 
         if json:
