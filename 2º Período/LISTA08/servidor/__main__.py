@@ -44,7 +44,7 @@ def cadastrar():
             if valido[0]:
                 cadastrado = adicionar_contato(nome, email, telefone, nascimento)
                 if cadastrado:
-                    return ResponseMessage(status="ok", message=strings['cadastramento']['cadastrado']).json()
+                    return ResponseMessage(status="ok", message=strings['cadastramento']['cadastrado']).json(), 201
                 else:
                     return ResponseMessage(message=strings['cadastramento']['nao_cadastrado']).json(), 500
 
@@ -66,7 +66,7 @@ def cadastrar():
     except:
         print (format_exc())
 
-@app.route("/remover_contato", methods=["GET"])
+@app.route("/remover_contato", methods=["DELETE"])
 def remover():
     try:
         parametros = ["email"]
@@ -93,7 +93,7 @@ def remover():
     except:
         print (format_exc())
 
-@app.route('/recadastrar_contato', methods=["POST"])
+@app.route('/recadastrar_contato', methods=["PUT"])
 def recadastrar():
     """Atualizar contato já existente na base de dados. 
     
