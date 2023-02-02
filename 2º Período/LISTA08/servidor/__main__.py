@@ -146,6 +146,7 @@ def recadastrar():
                         return ResponseMessage(message=strings['cadastramento']['nascimento_invalido']).json(), 400
                     else:
                         return ResponseMessage(message=strings['cadastramento']["erro_desconhecido"]).json(), 400
+                        
         else:
             return ResponseMessage(message=strings['cadastramento']['faltando_parametros']).json(), 422
     except BadRequest:
