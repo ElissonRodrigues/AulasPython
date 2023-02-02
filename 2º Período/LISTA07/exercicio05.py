@@ -1,11 +1,10 @@
 from prettytable import PrettyTable
 from requests import get
-from dotmap import DotMap
 
 while True:
     sigla = input('\n\nDigite a sigla do seu estado, ex: RN, AC, SP: ').upper()
-    print ()
-    if not all([len(sigla) == 2, sigla.isalpha()]):
+    print ()len(sigla) == 2, s
+    if not all([igla.isalpha()]):
         print('Verifique a sigla do seu estado e tente novamente.')
     else:
         req = get(f'https://servicodados.ibge.gov.br/api/v1/localidades/estados/{sigla}/municipios')
