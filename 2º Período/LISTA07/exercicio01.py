@@ -1,4 +1,5 @@
 from requests import get
+from traceback import format_exc
 
 base_url = "https://dicio-api-ten.vercel.app/v2/"
 
@@ -37,9 +38,9 @@ while True:
                                 print(f"\n\nSilabas:\n{resultado}") if resultado else ""
 
             else:
-                print("Palavra não encontrada, use outra palavra")
+                print("\n\nPalavra não encontrada, use outra palavra")
     except KeyboardInterrupt:
         print("\n\nScript encerrado. Até breve!")
         break
-    except Exception as e:
-        print(e)
+    except:
+        print(format_exc())
