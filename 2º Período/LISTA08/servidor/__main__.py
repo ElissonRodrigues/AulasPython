@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from .ferramentas.validadores import *
 from servidor.database import *
 from .ferramentas.api_models import *
@@ -120,7 +120,7 @@ def recadastrar():
             id_ = int(json['id']) 
 
             if not checar_id(id_):
-                return ResponseMessage(message='Nenhum contato encontrado com esse ID').json()
+                return ResponseMessage(message='Nenhum contato encontrado com esse ID').json(), 404
             else:
                 nome = json["nome"]
                 email = json["email"]
@@ -161,11 +161,16 @@ def contatos():
         print (agenda)
 
         if agenda: 
-            return ResponseMessage(message={'id': {}, 'nome': {}, 'email': {}, 'Telefone: {}\nNascimento: {}",agenda[0][0], agenda[0][1], agenda[0][2], agenda[0][3], agenda[0][4])).json()
+            lista_contatos = []
+            for x in agenda:
+                lista_contatos.append(ContactData(id_=x[0], nome=x[1], email=x[2], telefone=x[3], nascimento=x[4]).json())
+            
+            return jsonify(lista_contatos)
         else:
-            return ResponseMessage(message=strings['contatos']['sem_contatos']).json()
+            return ResponseMessage(message=strings['contatos']['sem_contatos']).json(), 404
     except: 
-        return {}
         print (format_exc())
+        return {}, 500
+        
 
 app.run(debug=False)
