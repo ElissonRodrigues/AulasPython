@@ -16,6 +16,7 @@ class ContactData:
     email: str
     telefone: str
     nascimento: str
+    uri: dict
 
     def json(self):
         return asdict(self)

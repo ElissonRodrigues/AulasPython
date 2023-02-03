@@ -151,21 +151,21 @@ def busca_contato(nome: str) -> list[list] | False:
     return resultado if resultado else False
 
 
-def buscar_email(email: str) -> tuple[str] | False:
-    """buscar email na lista de contatos
+def buscar_id(id_: int) -> tuple[str, int] | False:    
+    """buscar por id na lista de contatos
 
     Args:
-        nome (str): nome do contato
+        id (int): id do contato
 
     Returns:
-        tuple[str] | False: tuple para contato encontrado.
+        tuple[str, int] | False: tuple para contato encontrado.
     """
     cursor.execute(
         """
-        SELECT * FROM contato WHERE email = ?
+        SELECT * FROM contato WHERE id = ?
         """,
-        (email,),
+        (id_,),
     )
 
-    resultado = cursor.fetchall()
+    resultado = cursor.fetchone()
     return resultado if resultado else False
