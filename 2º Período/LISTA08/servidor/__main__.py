@@ -4,13 +4,13 @@ from servidor.database import *
 from .ferramentas.api_models import *
 from traceback import format_exc
 from werkzeug.exceptions import BadRequest
-from .strings import strings
+from .res.strings import strings
 
 app = Flask(__name__)
 validar = Validar()
 
 
-@app.route("/cadastrar_contato", methods=["POST"])
+@app.route("/contato/cadastrar", methods=["POST"])
 def cadastrar():
     """Cadastrar novo contato no servidor. 
     
@@ -66,7 +66,7 @@ def cadastrar():
     except:
         print (format_exc())
 
-@app.route("/remover_contato", methods=["DELETE"])
+@app.route("/contato/remover", methods=["DELETE"])
 def remover():
     try:
         parametros = ["email"]
@@ -93,7 +93,7 @@ def remover():
     except:
         print (format_exc())
 
-@app.route('/recadastrar_contato', methods=["PUT"])
+@app.route('/contato/atualizar', methods=["PUT"])
 def recadastrar():
     """Atualizar contato já existente na base de dados. 
     
@@ -154,16 +154,18 @@ def recadastrar():
     except:
         print (format_exc())
 
-@app.route('/contatos',  methods=["GET"])
+@app.route('/contato/lista',  methods=["GET"])
 def contatos():
     try:
         agenda = listar_contato()
+        print (agenda)
 
         if agenda: 
-            return ResponseMessage(message=strings['contatos']['lista'].format(agenda[0], agenda[1], agenda[2], agenda[3], agenda[4])).json()
+            return ResponseMessage(message={'id': {}, 'nome': {}, 'email': {}, 'Telefone: {}\nNascimento: {}",agenda[0][0], agenda[0][1], agenda[0][2], agenda[0][3], agenda[0][4])).json()
         else:
             return ResponseMessage(message=strings['contatos']['sem_contatos']).json()
     except: 
+        return {}
         print (format_exc())
 
 app.run(debug=False)

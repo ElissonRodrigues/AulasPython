@@ -20,7 +20,6 @@ strings = {
         "faltando_parametros": 'Os parâmetros: "id", "nome", "email", "telefone" e "nascimento" são necessários',
     },
     "contatos": {
-        "lista": "Id: {}\nNome: {}\nE-mail: {}\nTelefone: {}\nNascimento: {}",
         "sem_contatos": "Sem contatos cadastrados, adicione contatos para essa agenda."
 
     }
