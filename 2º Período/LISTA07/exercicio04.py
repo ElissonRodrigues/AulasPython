@@ -1,7 +1,7 @@
 import requests
 
-def get_country_code(country_name):
-    url = "https://restcountries.com/v2/name/{}?fullText=true".format(country_name)
+def obter_codigo_pais(pais):
+    url = "https://restcountries.com/v2/name/{}?fullText=true".format(pais)
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
@@ -10,30 +10,30 @@ def get_country_code(country_name):
     else:
         return None
 
-def get_universities(country_code):
-    url = "https://raw.githubusercontent.com/Hipo/university-domains-list/master/world_universities_and_domains.json"
+def obter_universidades(codigo_pais):
+    url = "https://raw.githubusercontent.com/Hipo/university-domains-list/master/world_universidades_and_domains.json"
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
-        universities = [
+        universidades = [
             {"name": university["name"], "web_page": university["web_pages"]}
             for university in data
-            if university["alpha_two_code"] == country_code
+            if university["alpha_two_code"] == codigo_pais
         ]
-        return universities
+        return universidades
     else:
         return None
 
 while True:
-    country_name = input("Digite o nome do país: ")
-    country_code = get_country_code(country_name)
-    if country_code is not None:
-        universities = get_universities(country_code)
-        if universities is not None:
-            print("Universidades em {}:".format(country_name))
-            for university in universities:
+    pais = input("Digite o nome do país: ")
+    codigo_pais = obter_codigo_pais(pais)
+    if codigo_pais is not None:
+        universidades = obter_universidades(codigo_pais)
+        if universidades is not None:
+            print("Universidades em {}:".format(pais))
+            for university in universidades:
                 print("- {} ({})".format(university["name"], ', '.join(university["web_page"])))
         else:
-            print("Não foi possível obter informações sobre universidades no país.")
+            print("\n\nNão foi possível obter informações sobre universidades no país.")
     else:
-        print("Não foi possível obter informações sobre o país.")
+        print("\n\nNão foi possível obter informações sobre o país.")

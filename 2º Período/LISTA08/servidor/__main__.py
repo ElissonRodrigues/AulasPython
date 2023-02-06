@@ -30,15 +30,10 @@ def cadastrar():
     """    
     try:
         parametros = ["nome", "email", "telefone", "nascimento"]
-
         json = request.json
 
-        if len(json.keys()) == len(parametros) and all([x in json.keys() for x in parametros]):
-            nome = json["nome"]
-            email = json["email"]
-            telefone = json["telefone"]
-            nascimento = json["nascimento"]
-
+        if not set(parametros) - set(json):
+            nome, email, telefone, nascimento = (json[k] for k in parametros)
             valido = validar.todos(email, telefone, nascimento)
 
             if checar_email(email):
@@ -84,9 +79,9 @@ def remover():
     """
     try:
         parametros = ["email"]
-        json = request.args
-
-        if len(json.keys()) == len(parametros) and all([x in json.keys() for x in parametros]):
+        json = request.json
+        
+        if not set(parametros) - set(json):
             email = json["email"]
 
             if validar.email(email):
@@ -131,17 +126,13 @@ def recadastrar():
         parametros = ["id", "nome", "email", "telefone", "nascimento"]
         json = request.json
 
-        if len(json.keys()) == len(parametros) and all([x in json.keys() for x in parametros]):
+        if not set(parametros) - set(json):
             id_ = int(json['id']) 
 
             if not checar_id(id_):
                 return ResponseMessage(message='Nenhum contato encontrado com esse ID').json(), 404
             else:
-                nome = json["nome"]
-                email = json["email"]
-                telefone = json["telefone"]
-                nascimento = json["nascimento"]
-               
+                _, nome, email, telefone, nascimento = (json[k] for k in parametros)
 
                 valido = validar.todos(email, telefone, nascimento)
 
@@ -221,8 +212,7 @@ def buscar_nome():
     try:
         parametros = ['nome']
         json = request.args
-
-        if len(json.keys()) == len(parametros) and all([x in json.keys() for x in parametros]):
+        if not set(parametros) - set(json):
             nome = json['nome']
 
             resultado = busca_contato(nome)
