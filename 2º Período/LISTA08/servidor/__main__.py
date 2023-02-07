@@ -79,7 +79,7 @@ def remover():
     """
     try:
         parametros = ["email"]
-        json = request.json
+        json = request.args
         
         if not set(parametros) - set(json):
             email = json["email"]
