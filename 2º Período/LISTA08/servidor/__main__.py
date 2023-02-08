@@ -92,10 +92,10 @@ def remover():
                 else:
                     return ResponseMessage(message=strings['descadastramento']['erro_ao_remover']).json(), 422
             else:
-                return ResponseMessage(message=strings['descadastramento']['email_invalido']).json()
+                return ResponseMessage(message=strings['descadastramento']['email_invalido']).json(), 404
 
         else:
-            return ResponseMessage(message=strings['descadastramento']['faltando_parametros']).json()
+            return ResponseMessage(message=strings['descadastramento']['faltando_parametros']).json(), 400
 
     except BadRequest:
        return ResponseMessage(message=strings['descadastramento']['faltando_parametros']).json(), 422
@@ -154,9 +154,9 @@ def recadastrar():
                         return ResponseMessage(message=strings['cadastramento']["erro_desconhecido"]).json(), 400
                         
         else:
-            return ResponseMessage(message=strings['cadastramento']['faltando_parametros']).json(), 422
+            return ResponseMessage(message=strings['cadastramento']['faltando_parametros']).json(), 400
     except BadRequest:
-       return ResponseMessage(message=strings['descadastramento']['faltando_parametros']).json(), 422
+       return ResponseMessage(message=strings['descadastramento']['faltando_parametros']).json(), 400
     except:
         print (format_exc())
         return {}, 500
@@ -233,15 +233,15 @@ def buscar_nome():
             else:
                 return ResponseMessage(message=strings['contatos']['sem_contatos']).json(), 404
         else:
-            return ResponseMessage(message=strings['busca']['faltando_parametros']).json(), 422
+            return ResponseMessage(message=strings['busca']['faltando_parametros']).json(), 400
 
     except BadRequest:
-       return ResponseMessage(message=strings['busca']['faltando_parametros']).json(), 422
+       return ResponseMessage(message=strings['busca']['faltando_parametros']).json(), 400
     except:
         print (format_exc())
         return {}, 500
 
-@app.route('/contato/busca/<cid>', methods=["GET"])
+@app.route('/contato/busca/<int:cid>', methods=["GET"])
 def buscar_cid(cid):
     """Busca de  contato via ID
 
@@ -251,7 +251,7 @@ def buscar_cid(cid):
     print (resultado.json())
     """  
     try:
-          
+        
         x = buscar_id(int(cid))
 
         if x:
@@ -260,7 +260,7 @@ def buscar_cid(cid):
             return ResponseMessage(message=strings['busca']['id_invalido']).json(), 404
 
     except BadRequest:
-       return ResponseMessage(message=strings['busca']['faltando_parametros']).json(), 422
+       return ResponseMessage(message=strings['busca']['faltando_parametros']).json(), 400
     except:
         print (format_exc())
         return {}, 500
