@@ -44,7 +44,7 @@ def cadastrar():
                 if cadastrado:
                     return ResponseMessage(status="ok", message=strings['cadastramento']['cadastrado']).json(), 201
                 else:
-                    return ResponseMessage(message=strings['cadastramento']['nao_cadastrado']).json(), 500
+                    return ResponseMessage(message=strings['cadastramento']['nao_cadastrado']).json(), 422
 
             else:
                 if valido[1] == "email":
@@ -57,13 +57,13 @@ def cadastrar():
                     return ResponseMessage(message=strings['cadastramento']["erro_desconhecido"]).json(), 400
 
         else:
-            return ResponseMessage(message=strings['cadastramento']['faltando_parametros']).json(), 422
+            return ResponseMessage(message=strings['cadastramento']['faltando_parametros']).json(), 400
 
     except BadRequest:
-       return ResponseMessage(message=strings['cadastramento']['faltando_parametros']).json(), 422
+       return ResponseMessage(message=strings['cadastramento']['faltando_parametros']).json(), 400
     except:
         print (format_exc())
-        return {}, 404
+        return {}, 500
 
 @app.route("/contato/remover", methods=["DELETE"])
 def remover():
